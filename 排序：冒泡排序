@@ -1,0 +1,21 @@
+#include <bits/stdc++.h>
+#define N 1010
+using namespace std;
+int n = 6; // 待排序的元素个数为6
+int a[N] = {0, 2, 3, 2, 11, 7, 6}; // 待排序元素 {2,3,2,11,7,6}
+
+int main() {   
+    // 连续交换过程
+    // 一共n-1个阶段，在第i个阶段，未排序序列长度从n-i+1到n-i。
+    for (int i = 1; i < n; ++i) {  
+        // 将序列从1到n-i+1的最大值，移到n-i+1的位置
+        for (int j = 1; j <= n - i; ++j)
+            // 其中j枚举的是前后交换元素的前一个元素序号
+            // TODO 请补全代码完成阶段的冒泡过程
+            if (a[j] > a[j + 1]) 
+                swap(a[j], a[j + 1]);
+}
+for (int i = 1; i <= n; ++i) cout << a[i] << ' ';
+cout << endl;
+return 0;
+}
