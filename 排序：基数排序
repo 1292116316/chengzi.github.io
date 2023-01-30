@@ -1,0 +1,51 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+int maxvalue(vector<int>& nums, int len){
+	int max = nums[0];
+	//确定最大值
+	for (int i = 1; i < len; ++i){
+		if (nums[i] > max){
+			max = nums[i];
+		}
+	}
+	return max;
+}
+//e-排数的指数，e=1，按个位排，e=10，按10位排
+void _radixSort(vector<int>& nums, int len, int e){
+	vector<int>temp(len);//存放从桶中收集后数据的临时数组
+	vector<int> buckets(10, 0);//初始化10个桶
+	//遍历nums,将数据出现的次数存储在buckets中。
+	for (int i = 0; i < len; i++){
+		buckets[(nums[i] / e) % 10]++;
+	}
+	//调整buckets个元素的值
+	for (int i = 1; i < 10; i++){
+		buckets[i] = buckets[i] + buckets[i - 1];
+	}
+	for (int i = len - 1; i >= 0; i--){
+		int e1 = (nums[i] / e) % 10;
+		temp[buckets[e1] - 1] = nums[i];
+		buckets[e1]--;
+	}
+	nums.assign(temp.begin(), temp.end());
+}
+
+void radixSort(vector<int>& nums, int len){
+	int max = maxvalue(nums, len);
+	//int e1;//排序指数
+	for (int e1 = 1; max / e1 > 0; e1 = e1 * 10){
+		_radixSort(nums, len, e1);
+	}
+}
+int main(){
+	vector<int>nums = { 7, 5, 3, 1, 0, 8, 4, 6, 2 };
+	int len = nums.size();
+	radixSort(nums, len);
+	for (vector<int>::iterator it = nums.begin(); it != nums.end(); it++)
+	{
+		cout << *it << " ";
+	}
+	cout << endl;
+	return 0;
+}
