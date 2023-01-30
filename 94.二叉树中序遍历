@@ -12,12 +12,12 @@
  //递归
 /* class Solution {
 public:
-    vector&lt;int&gt; inorderTraversal(TreeNode* root) {
-        vector&lt;int&gt;list;
+    vector<int> inorderTraversal(TreeNode* root) {
+        vector<int>list;
         accesstree(root,list);
         return list;
     }
-    void accesstree(TreeNode*root,vector&lt;int&gt;&list){
+    void accesstree(TreeNode*root,vector<int>&list){
         if(root==nullptr){
             return;
         }
@@ -29,9 +29,9 @@ public:
 //迭代
 /* class Solution {
 public:
-    vector&lt;int&gt; inorderTraversal(TreeNode* root) {
+    vector<int> inorderTraversal(TreeNode* root) {
         stack<TreeNode*>list;
-        vector&lt;int&gt;res;
+        vector<int>res;
         while(root!=nullptr || !list.empty()){
             while(root!=nullptr){
                 list.push(root);
@@ -48,8 +48,8 @@ public:
 //Morris遍历
 class Solution {
 public:
-	vector&lt;int&gt; inorderTraversal(TreeNode* root) {
-		vector&lt;int&gt; res;
+	vector<int> inorderTraversal(TreeNode* root) {
+		vector<int> res;
 		TreeNode* pre = nullptr;
 		while(root!=nullptr) {
 			//如果左节点不为空，就将当前节点连带右子树全部挂到
