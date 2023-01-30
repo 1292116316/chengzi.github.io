@@ -1,0 +1,32 @@
+#include<bits/stdc++.h>
+using namespace std;
+void shellSort(vector<int>& arr) {
+	int len = arr.size();
+	int current, gap = len / 2;//当前分量以及分组的增量
+	while (gap > 0) {
+		for (int i = gap; i < len; i++) {
+			current = arr[i];
+			int preIndex = i - gap;//组内已被排序数据的索引
+			/*在组内已被排序过的数据寻找合适的位置，若当前待排序数据比比较的元素要小，
+			则将比较的元素放在组内后移一位*/
+			while (preIndex >= 0 && arr[preIndex] > current) {
+				arr[preIndex + gap] = arr[preIndex];
+				preIndex -= gap;
+			}
+			//已经找到待排序数据合适位置，插入
+			arr[preIndex + gap] = current;
+		}
+		cout << "本轮增量【" << gap << "】排序后的数组";
+		for (int i = 0; i < len; i++) {
+			cout << arr[i] << " ";
+		}
+		cout << endl;
+		gap /= 2;
+	}
+}
+int main() {
+	vector<int>arr= { 2, 4, 5, 7, 1, 3, 6, 8 };
+	int len = arr.size();
+	shellSort(arr);
+	return 0;
+}
