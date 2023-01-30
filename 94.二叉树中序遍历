@@ -1,0 +1,75 @@
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+ * };
+ */
+ //递归
+/* class Solution {
+public:
+    vector&lt;int&gt; inorderTraversal(TreeNode* root) {
+        vector&lt;int&gt;list;
+        accesstree(root,list);
+        return list;
+    }
+    void accesstree(TreeNode*root,vector&lt;int&gt;&list){
+        if(root==nullptr){
+            return;
+        }
+        accesstree(root->left,list);
+        list.push_back(root->val);
+        accesstree(root->right,list);
+    }
+}; */
+//迭代
+/* class Solution {
+public:
+    vector&lt;int&gt; inorderTraversal(TreeNode* root) {
+        stack<TreeNode*>list;
+        vector&lt;int&gt;res;
+        while(root!=nullptr || !list.empty()){
+            while(root!=nullptr){
+                list.push(root);
+                root=root->left;
+            }
+            root=list.top();
+            list.pop();
+            res.push_back(root->val);
+            root=root->right;
+        }
+        return res;
+    }
+}; */
+//Morris遍历
+class Solution {
+public:
+	vector&lt;int&gt; inorderTraversal(TreeNode* root) {
+		vector&lt;int&gt; res;
+		TreeNode* pre = nullptr;
+		while(root!=nullptr) {
+			//如果左节点不为空，就将当前节点连带右子树全部挂到
+			//左节点的最右子树下面
+			if(root->left!=nullptr) {
+				pre = root->left;
+				while(pre->right!=nullptr) {
+					pre = pre->right;
+				}
+				pre->right = root;
+				//将root指向root的left
+				TreeNode* tmp = root;
+				root = root->left;
+				tmp->left = nullptr;
+			//左子树为空，则打印这个节点，并向右边遍历	
+			} else {
+				res.push_back(root->val);
+				root = root->right;
+			}
+		}
+		return res;
+	}
+};
