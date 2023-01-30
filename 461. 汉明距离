@@ -1,0 +1,18 @@
+//位异或+位与计数
+/* class Solution {
+public:
+    int hammingDistance(int x, int y) {
+        int distance=0;
+        for(int i = x^y;i != 0;i &= (i-1)){
+            distance++;
+        }
+        return distance;
+    }
+}; */
+//内置函数
+class Solution {
+public:
+    int hammingDistance(int x, int y) {
+        return __builtin_popcount(x ^ y);
+    }
+};
