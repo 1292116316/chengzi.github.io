@@ -1,0 +1,51 @@
+/* class Solution {
+public:
+    vector<int> exchange(vector<int>& nums) {
+        int n=nums.size();
+        int left=0,right=n-1;
+        vector<int> ans(n);
+        for(auto res:nums){
+            if(res%2==1){
+                ans[left++]=res;
+            }else{
+                ans[right--]=res;
+            }
+        }
+        return ans;
+    }
+}; */
+/* class Solution {
+public:
+    vector<int> exchange(vector<int>& nums) {
+        vector<int>ans;
+        for(auto res:nums){
+            if(res%2==1){
+                ans.push_back(res);
+            }
+        }
+        for(auto res:nums){
+            if(res%2==0){
+                ans.push_back(res);
+            }
+        }
+        return ans;
+    }
+}; */
+class Solution {
+public:
+    vector<int> exchange(vector<int>& nums) {
+        int left = 0, right = nums.size() - 1;
+        while (left < right) {
+            while (left < right and nums[left] % 2 == 1) {
+                left++;
+            }
+            while (left < right and nums[right] % 2 == 0) {
+                right--;
+            }
+            if (left < right) {
+                swap(nums[left++], nums[right--]);
+            }
+        }
+        return nums;
+    }
+};
