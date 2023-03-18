@@ -1,0 +1,50 @@
+1.通过判断题目中无限循环无法变为1，由此通过判断结果是否重复出现得出此数是否是快乐数，只需要做循环的判断。
+2.利用快慢指针缩短寻找结果是否重复的可能，如果找到直接返回false，若不是则返回true。
+// class Solution {
+// public:
+//     int　getsum(int n){
+//         int sum=0;
+//         while(n){
+//             sum+=(n%10)*(n%10);
+//             n/=10;
+//         }
+//         return sum;
+//     }
+//     bool isHappy(int n) {
+//         unordered_set<int>ans;
+//         while(1){
+//             int sum=getsum(n);
+//             if(sum == 1){
+//                 return true;
+//             }
+//             if(ans.find(sum)!=ans.end()){
+//                 return false;
+//             }else{
+//                 ans.insert(sum);
+//             }
+//             n=sum;
+//         }
+//     }
+// };
+class Solution {
+public:
+    int　getSum(int n){
+        int sum=0;
+        while(n){
+            sum+=(n%10)*(n%10);
+            n/=10;
+        }
+        return sum;
+    }
+    bool isHappy(int n) {
+        int slow = n, fast = n;
+        do{
+            slow = getSum(slow);
+            fast = getSum(fast);
+            fast = getSum(fast);
+        }while(slow != fast);
+        
+        return slow == 1 ? true:false;
+        
+    }
+};
