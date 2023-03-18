@@ -1,0 +1,21 @@
+通过使用unordered_map将前两组数组中的元素的加和以及出现的次数统计出来，其次与剩下两组进行比较与之相反的直接统计count计数加1，最后返回count的值即为匹配的元组对数。
+class Solution {
+public:
+    int fourSumCount(vector<int>& nums1, vector<int>& nums2, vector<int>& nums3, vector<int>& nums4) {
+        unordered_map<int, int> umap; 
+        for (int a : nums1) {
+            for (int b : nums2) {
+                umap[a + b]++;
+            }
+        }
+        int count=0;
+        for (int c : nums3) {
+            for(int d : nums4){
+                if(umap.find(-(c + d)) != umap.end()){
+                    count += umap[0 - (c+d)];
+                }       
+            }
+        }
+        return count;
+    }
+};
