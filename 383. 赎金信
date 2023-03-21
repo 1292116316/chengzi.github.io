@@ -1,0 +1,38 @@
+//暴力
+// class Solution {
+// public:
+//     bool canConstruct(string ransomNote, string magazine) {
+//         for(int i=0;i<magazine.size();i++){
+//             for(int j=0;j<ransomNote.size();j++){
+//                 if(magazine[i]==ransomNote[j]){
+//                     ransomNote.erase(ransomNote.begin()+j);
+//                     break;
+//                 }
+//             }
+//         }
+//         if(ransomNote.size()==0)
+//             return true;
+//         else
+//             return false;
+//     }
+// };
+//哈希
+class Solution {
+public:
+    bool canConstruct(string ransomNote, string magazine) {
+        vector<int>record(26,0);
+        if(ransomNote.size()>magazine.size()){
+            return false;
+        }
+        for(int i=0;i<magazine.size();i++){
+            record[magazine[i]-'a']++;
+        }
+        for(int j=0;j<ransomNote.size();j++){
+            record[ransomNote[j]-'a']--;
+            if(record[ransomNote[j]-'a']<0){
+                return false;
+            }
+        }
+        return true;
+    }
+};
