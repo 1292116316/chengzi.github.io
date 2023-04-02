@@ -1,0 +1,14 @@
+//将内层for循环中的m改为2即为本题的答案，m即为一次可以爬梯阶的最大值。
+class Solution {
+public:
+    int climbStairs(int n) {
+        vector<int>dp(n+1,0);
+        dp[0]=1;
+        for(int i=1;i<=n;i++){
+            for(int j=1;j<=m;j++){
+                if(i>=j)dp[i]+=dp[i-j];
+            }
+        }
+        return dp[n];
+    }
+};
