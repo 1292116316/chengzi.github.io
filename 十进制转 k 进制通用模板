@@ -1,0 +1,15 @@
+class Solution {
+public:
+    string baseNeg2(int N) {
+        if (N == 0) return "0";
+        string res;
+        while (N != 0) {
+            int r = N % K;
+            // if (r < 0) r = (r + abs(K)) % abs(K);
+            r = (r + abs(K)) % abs(K); // works for r < 0 or r >= 0
+            res = std::to_string(r) + res;
+            N = (N - r) / (K);
+        }
+        return res;
+    }
+};
